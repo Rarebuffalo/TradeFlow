@@ -47,10 +47,10 @@ public class TimeframeAggregatorTest {
 
         AggregatedCandle first = result.get(0);
         assertEquals(LocalDateTimeToInstant(2026, 1, 1, 9, 15, 0), first.getDatetime());
-        assertEquals(BigDecimal.valueOf(100.0), first.getOpen());
-        assertEquals(BigDecimal.valueOf(109.0), first.getHigh());
-        assertEquals(BigDecimal.valueOf(95.0), first.getLow());
-        assertEquals(BigDecimal.valueOf(105.0), first.getClose());
+        assertEquals(BigDecimal.valueOf(100), first.getOpen());
+        assertEquals(BigDecimal.valueOf(109), first.getHigh());
+        assertEquals(BigDecimal.valueOf(95), first.getLow());
+        assertEquals(BigDecimal.valueOf(105), first.getClose());
         assertEquals(5000L, first.getVolume());
     }
 
@@ -62,10 +62,10 @@ public class TimeframeAggregatorTest {
 
         AggregatedCandle aggregated = result.get(0);
         assertEquals(LocalDateTimeToInstant(2026, 1, 1, 9, 15, 0), aggregated.getDatetime());
-        assertEquals(BigDecimal.valueOf(100.0), aggregated.getOpen());
-        assertEquals(BigDecimal.valueOf(119.0), aggregated.getHigh());
-        assertEquals(BigDecimal.valueOf(95.0), aggregated.getLow());
-        assertEquals(BigDecimal.valueOf(115.0), aggregated.getClose());
+        assertEquals(BigDecimal.valueOf(100), aggregated.getOpen());
+        assertEquals(BigDecimal.valueOf(119), aggregated.getHigh());
+        assertEquals(BigDecimal.valueOf(95), aggregated.getLow());
+        assertEquals(BigDecimal.valueOf(115), aggregated.getClose());
         assertEquals(15000L, aggregated.getVolume());
     }
 
