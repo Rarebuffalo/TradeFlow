@@ -3,7 +3,8 @@ package com.tradeflow.server.importer;
 import com.datastax.oss.driver.api.core.CqlSession;
 import com.datastax.oss.driver.api.core.cql.BoundStatement;
 import com.datastax.oss.driver.api.core.cql.PreparedStatement;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -17,8 +18,9 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-@Slf4j
 public class CsvImporter {
+
+    private static final Logger log = LoggerFactory.getLogger(CsvImporter.class);
 
     private static final String DEFAULT_CSV_PATH = "stock_data.csv";
     private static final String CASSANDRA_HOST = "127.0.0.1";

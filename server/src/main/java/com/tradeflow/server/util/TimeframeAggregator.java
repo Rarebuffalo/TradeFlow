@@ -51,14 +51,7 @@ public class TimeframeAggregator {
                 }
             }
 
-            aggregatedList.add(AggregatedCandle.builder()
-                    .datetime(bucketStart)
-                    .open(open)
-                    .high(high)
-                    .low(low)
-                    .close(close)
-                    .volume(totalVolume)
-                    .build());
+            aggregatedList.add(new AggregatedCandle(bucketStart, open, high, low, close, totalVolume));
         }
 
         return aggregatedList;
@@ -85,7 +78,6 @@ public class TimeframeAggregator {
             return dayStart.toInstant(ZoneOffset.UTC);
         }
 
-        // Align minutes into buckets from epoch (works since 1440 is divisible by all intervals)
         long minutesSinceEpoch = instant.getEpochSecond() / 60;
         long bucketMinutes = (minutesSinceEpoch / timeframeMinutes) * timeframeMinutes;
         return Instant.ofEpochSecond(bucketMinutes * 60);
