@@ -6,3 +6,4 @@ target/
 .classpath
 .settings/
 *.iml
+stock_data.csv

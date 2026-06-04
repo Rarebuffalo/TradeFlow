@@ -1,6 +1,5 @@
 package com.tradeflow.client;
 
-import lombok.Data;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -83,15 +82,45 @@ public class CandleClient implements CommandLineRunner {
         }
     }
 
-    @Data
     public static class ClientCandleResponse {
         private String symbol;
         private String timeframe;
         private List<ClientAggregatedCandle> candles;
         private int count;
+
+        public String getSymbol() {
+            return symbol;
+        }
+
+        public void setSymbol(String symbol) {
+            this.symbol = symbol;
+        }
+
+        public String getTimeframe() {
+            return timeframe;
+        }
+
+        public void setTimeframe(String timeframe) {
+            this.timeframe = timeframe;
+        }
+
+        public List<ClientAggregatedCandle> getCandles() {
+            return candles;
+        }
+
+        public void setCandles(List<ClientAggregatedCandle> candles) {
+            this.candles = candles;
+        }
+
+        public int getCount() {
+            return count;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
     }
 
-    @Data
     public static class ClientAggregatedCandle {
         private String datetime;
         private BigDecimal open;
@@ -99,5 +128,53 @@ public class CandleClient implements CommandLineRunner {
         private BigDecimal low;
         private BigDecimal close;
         private Long volume;
+
+        public String getDatetime() {
+            return datetime;
+        }
+
+        public void setDatetime(String datetime) {
+            this.datetime = datetime;
+        }
+
+        public BigDecimal getOpen() {
+            return open;
+        }
+
+        public void setOpen(BigDecimal open) {
+            this.open = open;
+        }
+
+        public BigDecimal getHigh() {
+            return high;
+        }
+
+        public void setHigh(BigDecimal high) {
+            this.high = high;
+        }
+
+        public BigDecimal getLow() {
+            return low;
+        }
+
+        public void setLow(BigDecimal low) {
+            this.low = low;
+        }
+
+        public BigDecimal getClose() {
+            return close;
+        }
+
+        public void setClose(BigDecimal close) {
+            this.close = close;
+        }
+
+        public Long getVolume() {
+            return volume;
+        }
+
+        public void setVolume(Long volume) {
+            this.volume = volume;
+        }
     }
 }
