@@ -5,8 +5,8 @@ import com.tradeflow.server.dto.CandleResponse;
 import com.tradeflow.server.model.StockCandle;
 import com.tradeflow.server.repository.CandleRepository;
 import com.tradeflow.server.util.TimeframeAggregator;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -19,14 +19,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Slf4j
 @Service
-@RequiredArgsConstructor
 public class CandleService {
 
+    private static final Logger log = LoggerFactory.getLogger(CandleService.class);
     private final CandleRepository candleRepository;
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private static final List<String> VALID_TIMEFRAMES = Arrays.asList("1m", "5m", "15m", "30m", "1h", "1d");
+
+    public CandleService(CandleRepository candleRepository) {
+        this.candleRepository = candleRepository;
+    }
 
     public CandleResponse getCandles(String symbol, String timeframe, String startDateStr, String endDateStr) {
         log.info("Request received - Symbol: {}, Timeframe: {}, Start: {}, End: {}", symbol, timeframe, startDateStr, endDateStr);
@@ -95,12 +98,7 @@ public class CandleService {
         long aggEndTime = System.currentTimeMillis();
         log.info("Aggregated to {} candles in {} ms", aggregatedCandles.size(), (aggEndTime - aggStartTime));
 
-        return CandleResponse.builder()
-                .symbol(symbol.trim())
-                .timeframe(timeframe.trim())
-                .candles(aggregatedCandles)
-                .count(aggregatedCandles.size())
-                .build();
+        return new CandleResponse(symbol.trim(), timeframe.trim(), aggregatedCandles, aggregatedCandles.size());
     }
 
     public static class ResourceNotFoundException extends RuntimeException {

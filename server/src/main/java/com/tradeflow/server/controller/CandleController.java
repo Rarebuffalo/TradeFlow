@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1")
 @Validated
-@RequiredArgsConstructor
 @Tag(name = "Stock Candles")
 public class CandleController {
 
     private final CandleService candleService;
+
+    public CandleController(CandleService candleService) {
+        this.candleService = candleService;
+    }
 
     @Operation(summary = "Retrieve aggregated stock candles")
     @ApiResponses(value = {
