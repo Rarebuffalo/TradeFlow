@@ -57,7 +57,6 @@ This project is a stock candle aggregation service that reads 1-minute OHLCV (Op
 * **Spring Boot 3.3.0**
 * **Maven 3.9**
 * **Apache Cassandra** (DataStax Cassandra Java Driver)
-* **Lombok**
 * **Springdoc OpenAPI** (Swagger UI)
 
 ---
@@ -109,7 +108,7 @@ Make sure the `stock_data.csv` is in the root directory (where this README is lo
 ```bash
 cd server
 mvn clean compile
-mvn exec:java -Dexec.mainClass="com.tradeflow.server.importer.CsvImporter"
+mvn exec:java -Dexec.mainClass="com.tradeflow.server.importer.CsvImporter" -Dexec.args="../stock_data.csv"
 ```
 
 ### 2. Start the Server Application
@@ -164,6 +163,11 @@ Compile the client application and execute it with parameters:
 cd ../client
 mvn clean package
 java -jar target/client-1.0.0.jar TCS 15m "2026-01-01 09:15:00" "2026-01-01 15:30:00"
+```
+
+Alternatively, you can run it directly using Maven:
+```bash
+mvn spring-boot:run -Dspring-boot.run.arguments="TCS 15m '2026-01-01 09:15:00' '2026-01-01 15:30:00'"
 ```
 
 ---
