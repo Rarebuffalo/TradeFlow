@@ -7,3 +7,4 @@ target/
 .settings/
 *.iml
 stock_data.csv
+.vscode/
