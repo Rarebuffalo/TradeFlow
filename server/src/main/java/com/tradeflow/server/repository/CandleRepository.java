@@ -21,6 +21,6 @@ public interface CandleRepository extends CassandraRepository<StockCandle, Stock
             Instant endDateTime
     );
 
-    @Query("SELECT symbol FROM stock_candles WHERE symbol = ?0 LIMIT 1 ALLOW FILTERING")
-    List<String> findSymbolExists(String symbol);
+    @Query("SELECT * FROM stock_candles WHERE symbol = ?0 LIMIT 1 ALLOW FILTERING")
+    List<StockCandle> findSymbolExists(String symbol);
 }

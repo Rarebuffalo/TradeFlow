@@ -67,7 +67,7 @@ public class CandleService {
             throw new IllegalArgumentException("Start date must be before or equal to end date");
         }
 
-        List<String> existenceCheck = candleRepository.findSymbolExists(symbol.trim());
+        List<StockCandle> existenceCheck = candleRepository.findSymbolExists(symbol.trim());
         if (existenceCheck.isEmpty()) {
             throw new ResourceNotFoundException("Symbol not found: " + symbol);
         }
