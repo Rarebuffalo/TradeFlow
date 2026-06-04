@@ -34,17 +34,18 @@ public class CandleClient implements CommandLineRunner {
         String startDate = args[2];
         String endDate = args[3];
 
-        String url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/v1/candles")
+        java.net.URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/v1/candles")
                 .queryParam("symbol", symbol)
                 .queryParam("timeframe", timeframe)
                 .queryParam("start_date", startDate)
                 .queryParam("end_date", endDate)
-                .toUriString();
+                .build()
+                .toUri();
 
-        System.out.println("Connecting to API: " + url + "\n");
+        System.out.println("Connecting to API: " + uri + "\n");
 
         try {
-            ResponseEntity<ClientCandleResponse> responseEntity = restTemplate.getForEntity(url, ClientCandleResponse.class);
+            ResponseEntity<ClientCandleResponse> responseEntity = restTemplate.getForEntity(uri, ClientCandleResponse.class);
             ClientCandleResponse response = responseEntity.getBody();
 
             if (response != null) {
